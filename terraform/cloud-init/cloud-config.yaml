@@ -1,0 +1,53 @@
+#cloud-config
+
+package_update: true
+package_upgrade: true
+
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/debian/ $RELEASE stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+packages:
+  - docker-ce
+  - docker-buildx-plugin
+  - docker-compose-plugin
+
+write_files:
+  - encoding: "b64"
+    content: "dmVyc2lvbjogIjMiCnNlcnZpY2VzOgogIGh1YjoKICAgIGltYWdlOiBqZXRicmFpbnMvaHViOjIwMjMuMS4xNzU2OAogICAgcG9ydHM6CiAgICAgIC0gIjgwODA6ODA4MCIKICB5b3V0cmFjazoKICAgIGltYWdlOiBqZXRicmFpbnMveW91dHJhY2s6MjAyMy4xLjE3NTgyCiAgICBwb3J0czoKICAgICAgLSAiODAwMDo4MDgwIgogIHRlYW1jaXR5OgogICAgaW1hZ2U6IGpldGJyYWlucy90ZWFtY2l0eS1zZXJ2ZXI6bGF0ZXN0CiAgICBwb3J0czogCiAgICAgIC0gIjgxMTE6ODExMSIKICB0ZWFtY2l0eS1hZ2VudDoKICAgIGltYWdlOiBqZXRicmFpbnMvdGVhbWNpdHktYWdlbnQ6bGF0ZXN0CiAgdXBzb3VyY2U6CiAgICBpbWFnZTogamV0YnJhaW5zL3Vwc291cmNlOjIwMjAuMS4yMDA2CiAgICBwb3J0czoKICAgICAgLSAiODIyMjo4MDgwIgo="
+    owner: "root:root"
+    path: "/root/docker-compose.yaml"
+
+  - path: /etc/systemd/system/jetbrains.service
+    permissions: "0644"
+    owner: root
+    content: |
+          [Unit]
+          Description=Jetbrains Service
+          Requires=docker.service network-online.target
+          After=docker.service network-online.target
+          [Service]
+          Type=oneshot
+          User=root
+          Environment="HOME=root"
+          WorkingDirectory=/root
+          ExecStart=/usr/bin/docker compose up
+          ExecStop=/usr/bin/docker compose down
+          Restart=on-failure
+          RestartSec=10
+          [Install]
+          WantedBy=multi-user.target
+
+runcmd:
+  - systemctl enable jetbrains
+
+# bootcmd:
+#   - [sh, -c, "cd /root ; docker compose up -d"]
+
+power_state:
+  delay: "now"
+  mode: "reboot"
+  message: "First Reboot"
+  condition: True

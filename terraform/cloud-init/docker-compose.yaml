@@ -1,0 +1,20 @@
+version: "3"
+services:
+  hub:
+    image: jetbrains/hub:2023.1.17568
+    ports:
+      - "8080:8080"
+  youtrack:
+    image: jetbrains/youtrack:2023.1.17582
+    ports:
+      - "8000:8080"
+  teamcity:
+    image: jetbrains/teamcity-server:latest
+    ports: 
+      - "8111:8111"
+  teamcity-agent:
+    image: jetbrains/teamcity-agent:latest
+  upsource:
+    image: jetbrains/upsource:2020.1.2006
+    ports:
+      - "8222:8080"
