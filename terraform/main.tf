@@ -24,18 +24,15 @@ resource "vultr_instance" "testlab" {
   ssh_key_ids = [vultr_ssh_key.main_ssh_key.id]
   enable_ipv6 = true
   user_data = "${file("cloud-init/cloud-config.yaml")}"
+
+  reserved_ip_id = data.vultr_reserved_ip.testlab.id
 }
 
-resource "vultr_reserved_ip" "example_reserved_ip" {
-
-  region = var.vultr_region
-
-  ip_type = var.vultr_ip_type
-
-  label = var.vultr_ip_label
-
-  instance_id = "${vultr_instance.testlab.id}"
-
+data "vultr_reserved_ip" "testlab" {
+  filter {
+    name = "label"
+    values = [var.vultr_ip_label]
+  }
 }
 
 resource "vultr_ssh_key" "main_ssh_key" {

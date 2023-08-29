@@ -16,3 +16,8 @@ variable "vultr_ip_label" {
   sensitive = true
 }
 
+variable "vultr_ip_id" {
+  description = "Reserved IP ID for a vultr server"
+  type = string
+  sensitive = true
+}
