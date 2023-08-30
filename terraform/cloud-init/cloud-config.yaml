@@ -17,7 +17,7 @@ packages:
 
 write_files:
   - encoding: "b64"
-    content: "dmVyc2lvbjogIjMiCnNlcnZpY2VzOgogIGh1YjoKICAgIGltYWdlOiBqZXRicmFpbnMvaHViOjIwMjMuMS4xNzU2OAogICAgcG9ydHM6CiAgICAgIC0gIjgwODA6ODA4MCIKICB5b3V0cmFjazoKICAgIGltYWdlOiBqZXRicmFpbnMveW91dHJhY2s6MjAyMy4xLjE3NTgyCiAgICBwb3J0czoKICAgICAgLSAiODAwMDo4MDgwIgogIHRlYW1jaXR5OgogICAgaW1hZ2U6IGpldGJyYWlucy90ZWFtY2l0eS1zZXJ2ZXI6bGF0ZXN0CiAgICBwb3J0czogCiAgICAgIC0gIjgxMTE6ODExMSIKICB0ZWFtY2l0eS1hZ2VudDoKICAgIGltYWdlOiBqZXRicmFpbnMvdGVhbWNpdHktYWdlbnQ6bGF0ZXN0CiAgdXBzb3VyY2U6CiAgICBpbWFnZTogamV0YnJhaW5zL3Vwc291cmNlOjIwMjAuMS4yMDA2CiAgICBwb3J0czoKICAgICAgLSAiODIyMjo4MDgwIgo="
+    content: "dmVyc2lvbjogIjMiCnNlcnZpY2VzOgogIGh1YjoKICAgIGltYWdlOiBqZXRicmFpbnMvaHViOjIwMjMuMS4xNzU2OAogICAgcG9ydHM6CiAgICAgIC0gIjgwODA6ODA4MCIKICB5b3V0cmFjazoKICAgIGltYWdlOiBqZXRicmFpbnMveW91dHJhY2s6MjAyMy4xLjE3NTgyCiAgICBwb3J0czoKICAgICAgLSAiODAwMDo4MDgwIgogIHRlYW1jaXR5OgogICAgaW1hZ2U6IGpldGJyYWlucy90ZWFtY2l0eS1zZXJ2ZXI6bGF0ZXN0CiAgICBwb3J0czogCiAgICAgIC0gIjgxMTE6ODExMSIKICB0ZWFtY2l0eS1hZ2VudDoKICAgIGltYWdlOiBqZXRicmFpbnMvdGVhbWNpdHktYWdlbnQ6bGF0ZXN0CiAgICBlbnZpcm9ubWVudDoKICAgICAgLSBTRVJWRVJfVVJMPSJodHRwOi8vdGVhbWNpdHk6ODExMSIKICB1cHNvdXJjZToKICAgIGltYWdlOiBqZXRicmFpbnMvdXBzb3VyY2U6MjAyMC4xLjIwMDYKICAgIHBvcnRzOgogICAgICAtICI4MjIyOjgwODAiCg=="
     owner: "root:root"
     path: "/root/docker-compose.yaml"
 
@@ -38,6 +38,9 @@ runcmd:
   - ufw enable
   - ufw allow ssh
   - ufw allow 8080/tcp
+  - ufw allow 8000/tcp
+  - ufw allow 8111/tcp
+  - ufw allow 8222/tcp
 
 power_state:
   delay: "now"
