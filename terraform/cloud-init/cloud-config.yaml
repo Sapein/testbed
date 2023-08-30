@@ -10,6 +10,7 @@ apt:
       keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
 
 packages:
+  - ufw
   - docker-ce
   - docker-buildx-plugin
   - docker-compose-plugin
@@ -34,9 +35,9 @@ write_files:
 
 runcmd:
   - systemctl enable jetbrains
-
-bootcmd:
-  - ["iptables-restore", "-n", "/etc/iptables.new.conf"]
+  - ufw enable
+  - ufw allow ssh
+  - ufw allow 8080/tcp
 
 power_state:
   delay: "now"

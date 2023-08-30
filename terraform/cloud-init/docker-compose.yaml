@@ -3,7 +3,7 @@ services:
   hub:
     image: jetbrains/hub:2023.1.17568
     ports:
-      - "8081:8080"
+      - "8080:8080"
   youtrack:
     image: jetbrains/youtrack:2023.1.17582
     ports:
