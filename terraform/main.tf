@@ -23,8 +23,7 @@ resource "vultr_instance" "testlab" {
   backups = "disabled"
   ssh_key_ids = [vultr_ssh_key.main_ssh_key.id]
   enable_ipv6 = true
-  user_data = "${file("cloud-init/cloud-config.yaml")}"
-
+  user_data = "${templatefile("cloud-init/cloud-config.yaml", { compose_file = filebase64("cloud-init/docker-compose.yaml"), service_file = filebase64("cloud-init/jetbrains.service")})}"
   reserved_ip_id = data.vultr_reserved_ip.testlab.id
 }
 
