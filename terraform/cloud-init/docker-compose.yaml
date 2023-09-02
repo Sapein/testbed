@@ -15,7 +15,7 @@ services:
   teamcity-agent:
     image: jetbrains/teamcity-agent:latest
     environment:
-      - SERVER_URL="http://teamcity:8111"
+      - SERVER_URL=teamcity:8111
   upsource:
     image: jetbrains/upsource:2020.1.2006
     ports:
