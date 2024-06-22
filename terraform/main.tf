@@ -2,10 +2,15 @@ terraform {
   required_providers {
     vultr = {
       source = "vultr/vultr"
-      version = "2.15.1"
+      version = "2.21.0"
+    }
+    namecheap = {
+      source = "namecheap/namecheap"
+      version = "2.1.2"
     }
   }
 }
+
 
 # Configure the Vultr Provider
 provider "vultr" {
@@ -37,4 +42,30 @@ data "vultr_reserved_ip" "testlab" {
 resource "vultr_ssh_key" "main_ssh_key" {
   name = "main_ssh_key"
   ssh_key = var.vultr_ssh_key
+}
+
+# Configure the Namecheap Provider
+provider "namecheap" {
+  user_name = var.namecheap_username
+  api_user = var.namecheap_username
+  api_key = var.namecheap_api_key
+}
+
+resource "namecheap_domain_records" "primary-xyz" {
+  domain = var.namecheap_main_domain
+  mode = "MERGE"
+
+  record {
+    hostname = "testlab"
+    type = "A"
+    ttl = "60"
+    address = vultr_instance.testlab.main_ip
+  }
+
+  record {
+    hostname = "testlab"
+    type = "AAAA"
+    ttl = "60"
+    address = vultr_instance.testlab.v6_main_ip
+  }
 }

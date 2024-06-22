@@ -21,3 +21,29 @@ variable "vultr_ip_id" {
   type = string
   sensitive = true
 }
+
+variable "namecheap_username" {
+  description = "Username for NameCheap"
+  type = string
+  sensitive = true
+}
+
+variable "namecheap_api_key" {
+  description = "API Key for NameCheap"
+  type = string
+  sensitive = true
+}
+
+variable "namecheap_main_domain" {
+  description = "Primary URL with Namecheap"
+  type = string
+  sensitive = true
+}
+
+
+variable "namecheap_test_domains" {
+  description = "Testing Domains for Namecheap"
+  type = list
+  sensitive = true
+}
+
