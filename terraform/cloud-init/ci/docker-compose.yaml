@@ -1,0 +1,6 @@
+version: "3"
+services:
+  teamcity-agent:
+    image: jetbrains/teamcity-agent:latest
+    environment:
+      - SERVER_URL=TC_IP

@@ -16,6 +16,13 @@ variable "vultr_server" {
   default = "vc2-1c-0.5gb" # Cheapest available vc2 instance in NJ.
 }
 
+variable "vultr_servers" {
+  description = "Additional Vultr Server Instances"
+  type = list
+  default = ["vc2-1c-0.5gb", "vc2-1c-1gb"]
+}
+
+
 variable "vultr_region" {
   description = "The Server Region"
   type = string
